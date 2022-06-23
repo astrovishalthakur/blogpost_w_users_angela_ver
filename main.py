@@ -13,7 +13,9 @@ import os
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+# app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+
+app.config['SECRET_KEY'] = "astrovishalthakur188000"
 
 ckeditor = CKEditor(app)
 Bootstrap(app)
@@ -133,6 +135,7 @@ def login():
     return render_template("login.html", form=form, current_user=current_user)
 
 
+@login_required
 @app.route('/logout')
 def logout():
     logout_user()
@@ -188,8 +191,6 @@ def add_new_post():
         return redirect(url_for("get_all_posts"))
 
     return render_template("make-post.html", form=form, current_user=current_user)
-
-
 
 
 @app.route("/edit-post/<int:post_id>", methods=["GET", "POST"])
